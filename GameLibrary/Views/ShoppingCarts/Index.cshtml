@@ -1,0 +1,73 @@
+﻿@model ShoppingCartViewModel
+@using GameLibrary.ViewModels
+
+@*<div class="row checkoutForm">
+        <h2>Your shopping cart</h2>
+        <table class="table table-bordered table-striped">
+            <tbody>
+                @foreach (var item in Model.SCart.SCartItems)
+                {
+                    <tr>
+                        <td class="text-left">@item.Book.BookTitle</td>
+                        <td class="text-left">@item.Book.BookAuthor</td>
+                        <td class="text-left">
+                            <a href="@Url.Action("Details", "Books", new { id = item.Book.BookID})" title="@item.Book.BookTitle" class="links">
+                                <img class="img-responsive" src="@Url.Content("~/images/" + @item.Book.BookImage)" height="100" width="100" alt="">
+                            </a>
+                        </td>
+                        <td class="text-right">@item.Book.BookPrice.ToString("c")</td>
+                        <td class="text-center"><a class="glyphicon glyphicon-remove text-danger remove" href="@Url.Action("RemoveFromShoppingCart", "SCarts", new { bookId = item.Book.BookID })" class="links">Remove</a>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>*@
+
+<div class="row checkoutForm">
+    <h2 style="font-family:Montserrat;">Your chosen books: </h2>
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Selected amount</th>
+                <th>Book</th>
+                <th class="text-right">Price</th>
+                <th class="text-right">Subtotal</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var line in Model.ShoppingCart.ShoppingCartItems)
+            {
+                <tr>
+                    <td class="text-center">@line.Amount</td>
+                    <td class="text-left">@line.Book.BookTitle</td>
+                    <td class="text-right">@line.Book.BookPrice.ToString("c")</td>
+                    <td class="text-right">
+                        @((line.Amount * line.Book.BookPrice).ToString("c"))
+                    </td>
+                    <td class="text-center"><a class="glyphicon glyphicon-remove text-danger remove" asp-controller="SCart" asp-action="RemoveFromShoppingCart" asp-route-drinkId="@line.Book.BookID"></a></td>
+                    @*<td class="text-center"><a class="glyphicon glyphicon-remove text-danger remove" href="@Url.Action("RemoveFromShoppingCart", "SCarts", new { bookId = line.Book.BookID })" class="links">Remove</a>*@
+                </tr>
+
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3" class="text-right">Total:</td>
+                <td class="text-right">
+                    @Model.ShoppingCartTotal.ToString("c")
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <div class="text-right">
+        <div class="btn-group ">
+            @*<a class="btn btn-success" asp-controller="Orders" asp-action="Create">Check out</a>*@
+            <a class="btn btn-success" href="@Url.Action("create", "Orders", new { ShoppingCartId = Model.ShoppingCart.ShoppingCartId })">Check out</a>
+            @*<a class="btn btn-success" href="@Url.Action("ClearAll", "SCarts", new { SCartId = Model.SCart.SCartId })">Check out</a>*@
+        </div>
+    </div>
+</div>

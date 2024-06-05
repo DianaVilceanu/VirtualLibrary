@@ -1,0 +1,150 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Books &mdash; Offers</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+    <link href="https://fonts.googleapis.com/css?family=Cinzel:400,700|Montserrat:400,700|Roboto&display=swap" rel="stylesheet">
+
+    @*  <link rel="stylesheet" href="/fonts/icomoon/style.css">
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/jquery-ui.css">
+    <link rel="stylesheet" href="/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="/css/owl.theme.default.min.css">
+
+    <link rel="stylesheet" href="/css/jquery.fancybox.min.css">
+
+    <link rel="stylesheet" href="/css/bootstrap-datepicker.css">
+
+    <link rel="stylesheet" href="/fonts/flaticon/font/flaticon.css">
+
+    <link rel="stylesheet" href="/css/aos.css">
+    <link href="/css/jquery.mb.YTPlayer.min.css" media="all" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/style.css">
+    *@
+
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        form p {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+        }
+
+        form input[type="text"] {
+            width: 300px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-right: 10px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        form input[type="submit"] {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            background-color: #5cb85c;
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            cursor: pointer;
+        }
+
+        .category-name {
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 10px;
+            font-family: 'Montserrat', sans-serif;
+        }
+    </style>
+</head>
+
+<form asp-controller="Categories" asp-action="CategoryDetails" method="get">
+    <p>
+        Category: <input type="text" name="SearchString">
+        <input type="submit" value="Search" />
+    </p>
+</form>
+
+
+<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+
+
+
+    <div class="row">
+        @foreach (Category item in Model.Categories)
+        {
+            <td>
+                <ul class="links">
+                    <center>
+                        <ul>
+                            <a href="@Url.Action("BookDetails", "Categories", new { id = item.CategoryID})" title="@item.CategoryName" class="links">
+                                <img class="img-responsive" src="@Url.Content("~/images/" + @item.CategoryImage)" height="350" width="350" alt="">
+                            </a>
+                        </ul>
+                        <div class="category-name">@Html.DisplayFor(modelItem => item.CategoryName)</div><br />
+                        @* <a asp-action="Go" asp-controller="Categories">Go</a> *@
+                    </center>
+                </ul>
+            </td>
+        }
+    </div>
+
+    <!-- .site-wrap -->
+    <!-- loader -->
+    <div id="loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" /><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#ff5e15" /></svg></div>
+
+    <script src="/js/jquery-3.3.1.min.js"></script>
+    <script src="/js/jquery-migrate-3.0.1.min.js"></script>
+    <script src="/js/jquery-ui.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/owl.carousel.min.js"></script>
+    <script src="/js/jquery.stellar.min.js"></script>
+    <script src="/js/jquery.countdown.min.js"></script>
+    <script src="/js/bootstrap-datepicker.min.js"></script>
+    <script src="/js/jquery.easing.1.3.js"></script>
+    <script src="/js/aos.js"></script>
+    <script src="/js/jquery.fancybox.min.js"></script>
+    <script src="/js/jquery.sticky.js"></script>
+    <script src="/js/jquery.mb.YTPlayer.min.js"></script>
+
+
+
+
+    <script src="/js/main.js"></script>
+
+</body>
+
+</html>
+<script src="/js/jquery-3.3.1.min.js"></script>
+<script src="/js/jquery-migrate-3.0.1.min.js"></script>
+<script src="/js/jquery-ui.js"></script>
+<script src="/js/popper.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/owl.carousel.min.js"></script>
+<script src="/js/jquery.stellar.min.js"></script>
+<script src="/js/jquery.countdown.min.js"></script>
+<script src="/js/bootstrap-datepicker.min.js"></script>
+<script src="/js/jquery.easing.1.3.js"></script>
+<script src="/js/aos.js"></script>
+<script src="/js/jquery.fancybox.min.js"></script>
+<script src="/js/jquery.sticky.js"></script>
+<script src="/js/jquery.mb.YTPlayer.min.js"></script>
+
+
+
+
+<script src="/js/main.js"></script>

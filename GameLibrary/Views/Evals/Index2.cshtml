@@ -1,0 +1,43 @@
+﻿@model IEnumerable<GameLibrary.Models.Eval>
+
+@{
+    ViewData["Title"] = "View Evals";
+}
+<style>
+    font-family:Montserrat;</style>
+<p>
+    <a asp-action="Create">Evaluate your books!</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.EvalSubject)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EvalDescription)
+            </th>
+
+            
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EvalSubject)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EvalDescription)
+                </td>
+
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.EvalId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.EvalId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.EvalId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,132 @@
+﻿@model IEnumerable<GameLibrary.Models.Book>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Books &mdash; Offers</title>
+   @*  <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+    <link href="https://fonts.googleapis.com/css?family=Cinzel:400,700|Montserrat:400,700|Roboto&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/fonts/icomoon/style.css">
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/jquery-ui.css">
+    <link rel="stylesheet" href="/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="/css/owl.theme.default.min.css">
+
+    <link rel="stylesheet" href="/css/jquery.fancybox.min.css">
+
+    <link rel="stylesheet" href="/css/bootstrap-datepicker.css">
+
+    <link rel="stylesheet" href="/fonts/flaticon/font/flaticon.css">
+
+    <link rel="stylesheet" href="/css/aos.css">
+    <link href="/css/jquery.mb.YTPlayer.min.css" media="all" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/style.css"> *@
+
+
+
+</head>
+
+<form asp-controller="Books" asp-action="BookListSearch" method="get">
+    <p>
+        Search Book: <input type="text" name="SearchString">
+        <input type="submit" value="Filter" />
+    </p>
+</form>
+
+<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+    <div class="site-wrap">
+        <th>
+            Filter by:
+            <a asp-action="BookList" asp-route-sortOrder="@ViewData["NameSortParm"]">@Html.DisplayNameFor(model => model.BookTitle)</a> |
+            <a asp-action="BookList" asp-route-sortOrder="@ViewData["DateSortParm"]">@Html.DisplayNameFor(model => model.PublishingYear)</a> |
+            <a asp-action="BookList" asp-route-sortOrder="@ViewData["PriceSortParm"]">@Html.DisplayNameFor(model => model.BookPrice)</a>
+            <select id="sort">
+                <option data-price="0:@Int32.MaxValue" value="all">All</option>
+                <option data-price="0:1-" value="1">$0 - $10</option>
+                <option data-price="11:30" value="2">$11 - $30</option>
+                <option data-price="31:50" value="3">$31 - 50</option>
+                <option data-price="50:@Int32.MaxValue" value="4">$50+ </option>
+            </select>
+        </th>
+
+        <div class="row" id="my-products">
+            @foreach (var item in Model)
+            {
+                <td>
+                    <ul class="links">
+                        <div data-productprice="@item.BookPrice">
+
+                            <center>
+                                <ul>
+                                    <a href="@Url.Action("Details", "Books", new { id = item.BookID})" title="@item.BookTitle" class="links">
+                                        <img class="img-responsive" src="@Url.Content("~/images/" + @item.BookImage)" height="350" width="300" alt="">
+                                    </a>
+                                </ul>
+                                @Html.DisplayFor(modelItem => item.BookTitle)<br />
+                                @Html.DisplayFor(modelItem => item.BookAuthor)<br />
+                                Price: @Html.DisplayFor(modelItem => item.BookPrice) $ <br />
+
+                                <a href="@Url.Action("AddToShoppingCart", "ShoppingCarts", new { bookId = item.BookID })" class="links">Add to favourites</a><br />
+                                <a href="@Url.Action("AddToShoppingCart", "SCarts", new { bookId = item.BookID })" class="links">Add to Cart</a>
+                            </center>
+
+                        </div>
+                    </ul>
+                </td>
+            }
+        </div>
+    </div>
+    <!-- .site-wrap -->
+    <!-- loader -->
+    <div id="loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" /><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#ff5e15" /></svg></div>
+
+@*     <script src="/js/jquery-3.3.1.min.js"></script>
+    <script src="/js/jquery-migrate-3.0.1.min.js"></script>
+    <script src="/js/jquery-ui.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/owl.carousel.min.js"></script>
+    <script src="/js/jquery.stellar.min.js"></script>
+    <script src="/js/jquery.countdown.min.js"></script>
+    <script src="/js/bootstrap-datepicker.min.js"></script>
+    <script src="/js/jquery.easing.1.3.js"></script>
+    <script src="/js/aos.js"></script>
+    <script src="/js/jquery.fancybox.min.js"></script>
+    <script src="/js/jquery.sticky.js"></script>
+    <script src="/js/jquery.mb.YTPlayer.min.js"></script>
+ *@
+
+
+
+    <script src="/js/main.js"></script>
+
+</body>
+
+</html>
+@* <script src="/js/jquery-3.3.1.min.js"></script>
+<script src="/js/jquery-migrate-3.0.1.min.js"></script>
+<script src="/js/jquery-ui.js"></script>
+<script src="/js/popper.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/owl.carousel.min.js"></script>
+<script src="/js/jquery.stellar.min.js"></script>
+<script src="/js/jquery.countdown.min.js"></script>
+<script src="/js/bootstrap-datepicker.min.js"></script>
+<script src="/js/jquery.easing.1.3.js"></script>
+<script src="/js/aos.js"></script>
+<script src="/js/jquery.fancybox.min.js"></script>
+<script src="/js/jquery.sticky.js"></script>
+<script src="/js/jquery.mb.YTPlayer.min.js"></script>
+
+
+
+
+<script src="/js/main.js"></script> *@

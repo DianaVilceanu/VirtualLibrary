@@ -1,0 +1,162 @@
+﻿
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@model IEnumerable<GameLibrary.Models.Category>
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<ApplicationUser> SignInManager
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Books &mdash; Offers</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+    <link href="https://fonts.googleapis.com/css?family=Cinzel:400,700|Montserrat:400,700|Roboto&display=swap" rel="stylesheet">
+
+    @* <link rel="stylesheet" href="/fonts/icomoon/style.css">
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/jquery-ui.css">
+    <link rel="stylesheet" href="/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="/css/owl.theme.default.min.css">
+
+    <link rel="stylesheet" href="/css/jquery.fancybox.min.css">
+
+    <link rel="stylesheet" href="/css/bootstrap-datepicker.css">
+
+    <link rel="stylesheet" href="/fonts/flaticon/font/flaticon.css">
+
+    <link rel="stylesheet" href="/css/aos.css">
+    <link href="/css/jquery.mb.YTPlayer.min.css" media="all" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="/css/style.css"> *@
+
+    <style>
+        .image-full {
+            width: 100%;
+            height: auto;
+            display: block;
+            margin-bottom: 20px;
+            border-radius: 15px; /* Rounded edges */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Small shadow for depth */
+            transition: opacity 0.5s ease-in-out; /* Smooth fade effect */
+        }
+
+            .image-full:hover {
+                opacity: 0.8; /* Fade effect on hover */
+            }
+        .button:hover {
+            background-color: azure;
+            color: black;
+        }
+
+        .center {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 100%;
+        }
+
+            .btn-group button {
+                background-color: #4CAF50;
+                border: 1px solid green;
+                color: white;
+                padding: 10px 24px;
+                cursor: pointer;
+                border-radius: 20px;
+                margin: 5px;
+                transition: background-color 0.3s, transform 0.3s;
+                font-family: 'Montserrat', sans-serif;
+                text-align: center;
+                flex: 1 1 calc(50% - 10px); /* Two buttons per row */
+                max-width: calc(50% - 10px);
+            }
+
+                .btn-group button:hover {
+                    background-color: #3e8e41;
+                    transform: scale(1.05);
+                }
+
+            .btn-group a {
+                color: white;
+                text-decoration: none;
+            }
+
+                .btn-group a:hover {
+                    color: white;
+                }
+
+        .image-full {
+            width: 100%;
+            height: auto;
+            display: block;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+
+    <img src="~/images/1.jpg" alt="Full Width Image" class="image-full">
+
+    <div class="btn-group center">
+        <button>
+            <a class="nav-link text-dark" asp-area="" asp-controller="Books" asp-action="Index">Add Book</a>
+        </button>
+        @* <button>
+        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="LuceneView">Add Lucene Index</a>
+        </button>*@
+        <button>
+            <a class="nav-link text-dark" asp-area="" asp-controller="Categories" asp-action="AddCategory">Add Category</a>
+        </button>
+        <button>
+            <a class="nav-link text-dark" asp-area="" asp-controller="Authors" asp-action="Index">Add Author</a>
+        </button>
+        <button>
+            <a class="nav-link text-dark" asp-area="" asp-controller="Orders" asp-action="Index">View Orders</a>
+        </button>
+        <button>
+            <a class="nav-link text-dark" asp-area="" asp-controller="JobApplications" asp-action="Index">View Job Applications</a>
+        </button>
+        <button>
+            <a class="nav-link text-dark" asp-area="" asp-controller="JobSections" asp-action="Create">Add New Job</a>
+        </button>
+    </div>
+
+    <!-- .site-wrap -->
+    <!-- loader -->
+    <div id="loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" /><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#ff5e15" /></svg></div>
+
+    <script src="/js/jquery-3.3.1.min.js"></script>
+    <script src="/js/jquery-migrate-3.0.1.min.js"></script>
+    <script src="/js/jquery-ui.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/owl.carousel.min.js"></script>
+    <script src="/js/jquery.stellar.min.js"></script>
+    <script src="/js/jquery.countdown.min.js"></script>
+    <script src="/js/bootstrap-datepicker.min.js"></script>
+    <script src="/js/jquery.easing.1.3.js"></script>
+    <script src="/js/aos.js"></script>
+    <script src="/js/jquery.fancybox.min.js"></script>
+    <script src="/js/jquery.sticky.js"></script>
+    <script src="/js/jquery.mb.YTPlayer.min.js"></script>
+    <script src="/js/main.js"></script>
+
+</body>
+
+</html>
+

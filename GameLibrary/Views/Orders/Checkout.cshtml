@@ -1,0 +1,131 @@
+﻿@model CreateOrderViewModel
+
+<div class="row orderForm ">
+
+    <form asp-action="Checkout" method="post" class="form-horizontal" role="form">
+        <div class="form-group">
+            <label asp-for="FirstName" class="control-label"></label>
+            <input asp-for="FirstName" class="form-control" />
+            <span asp-validation-for="FirstName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="LastName" class="control-label"></label>
+            <input asp-for="LastName" class="form-control" />
+            <span asp-validation-for="LastName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Phone" class="control-label"></label>
+            <input asp-for="Phone" class="form-control" />
+            <span asp-validation-for="Phone" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="OrderPlaced" class="control-label"></label>
+            <input asp-for="OrderPlaced" class="form-control" />
+            <span asp-validation-for="OrderPlaced" class="text-danger"></span>
+        </div>
+
+        @*<div class="form-group">
+            @Html.DropDownListFor(n => n.DeliveryMethodID, Model.DeliveryMethods, "Please select delivery method")
+        </div>
+        <div class="form-group">
+            @Html.DropDownListFor(n => n.PaymentMethodID, Model.PaymentMethods, "Please select payment method")
+        </div>*@
+
+
+        <Select id="delivery" name="delivery method" required>
+            <option value="" disabled selected>Add the address</option>
+            <option value="AtHome">Add the full address</option>
+            <option value="InStore">Add just the city</option>
+        </Select>
+        <div id="AtHome" class="colors" style="display:none">
+            <div class="form-group">
+                <label asp-for="Address" class="control-label"></label>
+                <input asp-for="Address" class="form-control" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="City" class="control-label"></label>
+                <input asp-for="City" class="form-control" />
+                <span asp-validation-for="City" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="State" class="control-label"></label>
+                <input asp-for="State" class="form-control" />
+                <span asp-validation-for="State" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Country" class="control-label"></label>
+                <input asp-for="Country" class="form-control" />
+                <span asp-validation-for="Country" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ZipCode" class="control-label"></label>
+                <input asp-for="ZipCode" class="form-control" />
+                <span asp-validation-for="ZipCode" class="text-danger"></span>
+            </div>
+        </div>
+        <div id="InStore" class="colors" style="display:none">
+            <div class="form-group">
+                <label asp-for="City" class="control-label"></label>
+                <input asp-for="City" class="form-control" />
+                <span asp-validation-for="City" class="text-danger"></span>
+            </div>
+        </div><br />
+        <br />
+
+        <Select id="payment" name="payment method" required>
+            <option value="" disabled selected>Payment Method</option>
+            <option value="CreditCard">Credit Card</option>
+            <option value="Cash">Cash</option>
+        </Select>
+        <div id="CreditCard" class="colors" style="display:none">
+            <br />
+            <div class="form-group">
+                <label asp-for="CreditCardNo" class="control-label"></label>
+                <input asp-for="CreditCardNo" class="form-control" />
+                <span asp-validation-for="CreditCardNo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CVV" class="control-label"></label>
+                <input asp-for="CVV" class="form-control" />
+                <span asp-validation-for="CVV" class="text-danger"></span>
+            </div>
+        </div>
+        <div id="Cash" class="colors" style="display:none">
+            <p>You will pay cash, when your order arrives.</p>
+        </div>
+        <br />
+        <br />
+
+        <div class="form-group">
+            <label asp-for="OrderCost" class="control-label"></label>
+            <input asp-for="OrderCost" class="form-control" />
+            <span asp-validation-for="OrderCost" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <div class="btn-group col-md-offset-2 col-md-8">
+                <input class="btn btn-success" type="submit" value="Complete order" />
+                @*<input class="btn btn-default" type="submit" value="Return " />*@
+            </div>
+        </div>
+
+    </form>
+</div>
+
+<script>
+        $(function() {
+        $('#delivery').change(function(){
+            $('.colors').hide();
+            $('#' + $(this).val()).show();
+        });
+    });
+</script>
+<script>
+    $(function () {
+        $('#payment').change(function () {
+            $('.colors').hide();
+            $('#' + $(this).val()).show();
+        });
+    });
+</script>

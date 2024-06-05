@@ -1,0 +1,63 @@
+﻿@model IEnumerable<GameLibrary.Models.JobSection>
+
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<ApplicationUser> SignInManager
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1 style ="font-family:Montserrat;">Work with us!</h1>
+
+
+@if (SignInManager.IsSignedIn(User) && User.IsInRole("admin"))
+{
+    <p>
+        <a asp-action="Create">Create New</a>
+
+
+    </p>
+}
+@*<table class="table">*@
+@*<thead>
+        <tr>
+            <th>
+                Job
+            </th>
+            <th>
+                Descriere
+            </th>
+            <th></th>
+        </tr>
+    </thead>*@
+@*<tbody>*@
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-3">
+
+            <div class="card">
+                <img src="~/images/job-description.png" alt="Avatar" style="width:inherit; height:240px;">
+                <div class="container">
+                    <h4 style="font-family:Montserrat;"><b> <a asp-action="Details" asp-route-id="@item.JobSectionID">@Html.DisplayFor(modelItem => item.JobName)</a> </b></h4>
+
+
+                    <p>@Html.DisplayFor(modelItem => item.JobDescription)</p>
+
+
+                    <a asp-controller="JobApplications" asp-action="Create" class="btn btn-success">Apply</a>
+                    @if (SignInManager.IsSignedIn(User) && User.IsInRole("admin"))
+                    {
+                        <a asp-action="Delete" asp-route-id="@item.JobSectionID">Delete</a>
+                        <a asp-action="Edit" asp-route-id="@item.JobSectionID">Edit</a>
+                    }
+
+
+
+                </div>
+            </div>
+        </div>
+    }
+    @*</tbody>
+        </table>*@
+</div>

@@ -1,0 +1,186 @@
+﻿@model IEnumerable<GameLibrary.Models.Book>
+@using GameLibrary.ViewModels
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Books &mdash; Offers</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   @*  <link href="https://fonts.googleapis.com/css?family=Cinzel:400,700|Montserrat:400,700|Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/fonts/icomoon/style.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/jquery-ui.css">
+    <link rel="stylesheet" href="/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="/css/jquery.fancybox.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="/fonts/flaticon/font/flaticon.css">
+    <link rel="stylesheet" href="/css/aos.css">
+    <link href="/css/jquery.mb.YTPlayer.min.css" media="all" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/css/style.css"> *@
+</head>
+
+@* <form asp-controller="Books" asp-action="BookListSearch" method="get">
+    <p>
+        <input type="text" name="SearchString" placeholder="Search for an offer">
+        <input type="submit" value="Search" />
+    </p>
+</form> *@
+
+@*<form asp-controller="Books" asp-action="BookListSearch" method="get">
+    <p>
+        <input type="text" id="bookName" name="SearchString" placeholder="Search your book">
+        <input type="submit" value="Search" />
+    </p>
+</form>*@
+
+@* <form enctype="multipart/form-data" id="formSearch" role="form" class="form-horizontal">
+    <div class="form-group">
+        <label>Search specifications documents:</label>
+        <div class="input-group col-lg-offset-3">
+            <input type="text" name="textToSearch" id="textToSearch" placeholder="Insert searching term" />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-lg-offset-3">
+            <input type="submit" class="btn-default btn-sm" value="Find" />
+        </div>
+    </div>
+    <div role="form" class="form-horizontal">
+        <div class="form-group">
+            <div class="row" id="idOutputSearch">
+                <!--Result of searching-->
+            </div>
+        </div>
+    </div>
+</form> *@
+
+<a asp-controller="Books" asp-action="Predict" class="btn btn-primary">Recommendations</a>
+
+
+<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+    <div class="site-wrap">
+        <th>
+            Filter by:
+            <a asp-action="BookList" asp-route-sortOrder="@ViewData["NameSortParm"]">@Html.DisplayNameFor(model => model.BookTitle)</a> |
+            <a asp-action="BookList" asp-route-sortOrder="@ViewData["DateSortParm"]">@Html.DisplayNameFor(model => model.PublishingYear)</a> |
+           @*  <a asp-action="BookList" asp-route-sortOrder="@ViewData["PriceSortParm"]">@Html.DisplayNameFor(model => model.BookPrice)</a>
+            <select id="sort">
+                <option data-price="0:@Int32.MaxValue" value="all">All</option>
+                <option data-price="0:10" value="1">0 - 10</option>
+                <option data-price="11:30" value="2">11 - 30</option>
+                <option data-price="31:50" value="3">31 - 50</option>
+                <option data-price="50:@Int32.MaxValue" value="4">50+ </option>
+            </select> *@
+        </th>
+
+        <div class="row" id="my-products">
+            @foreach (var item in Model)
+            {
+                <td>
+                    <ul class="links">
+                        <div data-productprice="@item.BookPrice">
+
+                            <center>
+                                <ul>
+                                    <a href="@Url.Action("Details", "Books", new { id = item.BookID})" title="@item.BookTitle" class="links">
+                                        <img class="img-responsive" src="@Url.Content("~/images/" + @item.BookImage)" height="300" width="300" alt="">
+                                    </a>
+                                </ul>
+                                Available: @Html.DisplayFor(modelItem => item.Quantity)<br />
+                                @Html.DisplayFor(modelItem => item.BookTitle)<br />
+                                @* Price: @Html.DisplayFor(modelItem => item.BookPrice) ron <br /> *@
+
+                                <a href="@Url.Action("AddToShoppingCart", "ShoppingCarts", new { bookId = item.BookID })" class="links">Add to reservation</a><br />
+
+                            </center>
+
+                        </div>
+                    </ul>
+                </td>
+            }
+        </div>
+    </div>
+    <!-- .site-wrap -->
+    <!-- loader -->
+    <div id="loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" /><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#ff5e15" /></svg></div>
+
+    
+
+
+</body>
+</html>
+
+<script src="/js/popper.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/owl.carousel.min.js"></script>
+<script src="/js/bootstrap-datepicker.min.js"></script>
+<script src="/js/aos.js"></script>
+<script src="/js/main.js"></script>
+
+<script>
+    $(function () {
+
+        var $cards = $("#my-products").find("[data-productprice]");
+        $("#sort").change(function () {
+            var t = $(this).find(':selected').data('price');
+            var a = t.split(':');
+            var l = parseFloat(a[0]);
+            var u = parseFloat(a[1]);
+
+            $.each($cards, function (a, b) {
+                var p = parseFloat($(b).data("productprice"));
+                if (p >= l && p <= u) {
+                    $(b).show();
+                } else {
+                    $(b).hide();
+                }
+            });
+        });
+    });
+</script>
+
+
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#bookName').autocomplete({
+            source: '/api/book/search'
+        });
+    });
+</script>
+
+
+<script>
+    $("#formSearch").on("submit", function (e) {
+        e.preventDefault();
+        var textToSearch = $("#textToSearch").val();
+        var url = "/Books/Searching";
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: { 'textToSearch': textToSearch },
+            success: function (data) {
+                var new_page = window.open();
+                new_page.document.write(data);
+                //display data (HTML+CSS) into html bloc
+                //$("#idOutputSearch").html(data);
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                $("#idOutputSearch").html("Error Loading");
+            }
+        });
+    });
+</script>
+
+<script>
+    var clicked = function () {
+        var new_page = window.open();
+        new_page.document.write("output");
+    }
+</script>

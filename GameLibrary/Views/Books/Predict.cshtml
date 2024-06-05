@@ -1,0 +1,62 @@
+﻿@model GameLibraryML.Model.ModelInput
+@using GameLibrary.Models
+
+
+@{
+    ViewData["Title"] = "Predict";
+}
+<h1 style="font-family:Montserrat"> Recommendations </h1>
+
+<hr />
+
+@if (ViewBag.Result != null)
+{
+
+    <h3 style="font-family:Montserrat"> @ViewBag.Result.Prediction</h3>
+    @foreach (var item in ViewBag.Result.Score)
+    {
+
+        <div class="row">
+            <div class="col-md-6">
+
+
+
+                <h4 style="font-family:Montserrat"> @((item * 100).ToString("0.##\\%")) </h4>
+               
+            </div>
+        </div>
+        <hr />
+      }
+    }
+
+
+
+<div class="row" style="font-family:Montserrat">
+        <div class="col-md-12">
+            <form asp-action="Predict">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Username" class="control-label"></label>
+                    <input asp-for="Username" class="form-control" />
+                    <span asp-validation-for="Username" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Gamename" class="control-label">Bookname</label>
+                    <input asp-for="Gamename" class="form-control" />
+                    <span asp-validation-for="Gamename" class="text-danger"></span>
+                </div>
+                <div class="form-group text-right">
+                    <input type="submit" value="Predict" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+
+
+
+
+    @*@section Scripts{
+            @await { Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+        }*@

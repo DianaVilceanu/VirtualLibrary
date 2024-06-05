@@ -1,0 +1,3 @@
+Models - clasele pt baza de date
+Repository - actiunile pe baza de date create delete etc
+Controllers - logica

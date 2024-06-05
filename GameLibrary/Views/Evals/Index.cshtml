@@ -1,0 +1,108 @@
+﻿@model IEnumerable<GameLibrary.Models.Eval>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<ApplicationUser> SignInManager
+<head>
+<style>
+    h1 {
+        font-family: 'Montserrat', sans-serif;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .btn-evaluate {
+        background-color: #4CAF50; /* Green background */
+        border: none;
+        color: white; /* White text */
+        padding: 10px 20px; /* Some padding */
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 12px; /* Rounded corners */
+        transition: background-color 0.3s, transform 0.3s; /* Smooth hover effects */
+        font-family: 'Montserrat', sans-serif;
+    }
+
+        .btn-evaluate:hover {
+            background-color: #45a049;
+            transform: scale(1.05); /* Slightly enlarge on hover */
+        }
+
+    .eval-rect {
+        border: 1px solid #ddd;
+        border-radius: 8px; /* Rounded corners */
+        padding: 10px;
+        background-color: #f9f9f9; /* Light background color */
+        margin-bottom: 10px;
+        font-family: 'Montserrat', sans-serif;
+    }
+</style>
+</head>
+
+<body>
+
+    <h1 style="font-family:Montserrat;">Your opinion matters!</h1>
+
+    <p>
+        <a asp-action="Create" class="btn-evaluate">Evaluate your books!</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Subject
+                </th>
+                <th>
+                    Details
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="eval-rect">
+                        @Html.DisplayFor(modelItem => item.EvalSubject)
+                    </td>
+                    <td class="eval-rect">
+                        @Html.DisplayFor(modelItem => item.EvalDescription)
+                    </td>
+                    <td>
+                        @if (SignInManager.IsSignedIn(User) && User.IsInRole("admin"))
+                        {
+                            <a asp-action="Edit" asp-route-id="@item.EvalId">Edit</a>
+                            <a asp-action="Details" asp-route-id="@item.EvalId">Details</a>
+                            <a asp-action="Delete" asp-route-id="@item.EvalId">Delete</a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <script src="/js/jquery-3.3.1.min.js"></script>
+    <script src="/js/jquery-migrate-3.0.1.min.js"></script>
+    <script src="/js/jquery-ui.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/owl.carousel.min.js"></script>
+    <script src="/js/jquery.stellar.min.js"></script>
+    <script src="/js/jquery.countdown.min.js"></script>
+    <script src="/js/bootstrap-datepicker.min.js"></script>
+    <script src="/js/jquery.easing.1.3.js"></script>
+    <script src="/js/aos.js"></script>
+    <script src="/js/jquery.fancybox.min.js"></script>
+    <script src="/js/jquery.sticky.js"></script>
+    <script src="/js/jquery.mb.YTPlayer.min.js"></script>
+    <script src="/js/main.js"></script>
+
+</body>
